@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { LoadingController } from '@ionic/angular';
+
 const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' + 
               ', seddo eiusmod tempor incididunt ut labore et dolore magna ' + 
               'aliqua. Ut enim ad minim veniam, quis nostrud exercitation ' + 
@@ -34,7 +36,9 @@ export class ExploreContainerComponent implements OnInit {
 
   private rotateImg: number = 0;
 
-  constructor() { 
+  constructor(
+    public loadingController: LoadingController
+  ) { 
     console.log(`creating: ${this.constructor.name}`);
   }
 
@@ -50,8 +54,21 @@ export class ExploreContainerComponent implements OnInit {
     this.generateStubData();
   }
 
-  private generateStubData():void {
-    for (let i = 0; i < 1000; i++) {
+  ngOnDestroy() {
+    console.log(`ngOnDestroy: ${this.constructor.name}`)
+  }
+
+  private async generateStubData() {
+    console.log(`generateStubData - start`);
+    
+    const loading = await this.loadingController.create({
+      spinner: "bubbles",
+      // duration: 5000,
+      translucent: true
+    });
+    await loading.present();
+
+    for (let i = 0; i < 10; i++) {
       this.items.push({
         name: i + ' - ' + images[this.rotateImg],
         imgSrc: this.getImgSrc(),
@@ -65,6 +82,9 @@ export class ExploreContainerComponent implements OnInit {
         this.rotateImg = 0;
       }
     }
+
+    loading.dismiss();
+    console.log(`generateStubData - finish`);
   }
 
   private getImgSrc():string {

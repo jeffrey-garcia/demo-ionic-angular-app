@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  public title:string = "Sync"
 
   constructor() {
     console.log(`creating: ${this.constructor.name}`);

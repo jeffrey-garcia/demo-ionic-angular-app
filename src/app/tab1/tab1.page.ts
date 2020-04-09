@@ -16,7 +16,21 @@ export class Tab1Page {
     console.log(`ngOnInit: ${this.constructor.name}`);
   }
 
+  ionViewWillEnter() {
+    console.log(`ionViewWillEnter: ${this.constructor.name}`)
+  }
 
+  ionViewDidEnter() {
+    console.log(`ionViewDidEnter: ${this.constructor.name}`)
+  }
+
+  ionViewWillLeave() {
+    console.log(`ionViewWillLeave: ${this.constructor.name}`)
+  }
+
+  ionViewDidLeave() {
+    console.log(`ionViewDidLeave: ${this.constructor.name}`)
+  }
 
   ngOnDestroy() {
     console.log(`ngOnDestroy: ${this.constructor.name}`);

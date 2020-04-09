@@ -1,3 +1,16 @@
+<!-- Animated Searchbar -->
+<ion-searchbar 
+  inputmode="numeric" 
+  animated 
+  placeholder="search by ID" 
+  showCancelButton="focus" 
+  cancelButtonText="Cancel">
+</ion-searchbar>
+
+<!-- <ion-toolbar>
+  <ion-searchbar></ion-searchbar>
+</ion-toolbar> -->
+
 <!-- <ion-content>
   <ion-virtual-scroll [items]="items">
     <ion-item *virtualItem="let item">
@@ -24,7 +37,8 @@
         Item: {{ item.name }}
       </ion-item>
       <ion-item-options side="end">
-        <button ion-button color="danger" (click)="delete(item)">Delete</button>
+        <!-- <button ion-button color="danger" (click)="delete(item)">Delete</button> -->
+        <ion-button expand="full" color="light" (click)="delete(item)">Delete</ion-button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

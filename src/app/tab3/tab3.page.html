@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      {{ title }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,44 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">{{ title }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <!-- <app-explore-container name="Tab 3 page"></app-explore-container> -->
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>We're sorry</ion-card-subtitle>
+      <ion-card-title>Oops!</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Looks like the developer is too busy to get this done.
+      We will let you know when this is ready. 
+      Please stay tuned.
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-item>
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>Manulife Headquarters</ion-label>
+    </ion-item>
+  
+    <ion-card-content>
+      200 Bloor Street East
+      Toronto, Ontario
+      Canada M4W 1E5
+      Phone: 416-926-3000
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-item href="https://www.manulife.com/">
+      <ion-icon name="construct-outline" slot="start"></ion-icon>
+      <ion-label>Visit Manulife website</ion-label>
+    </ion-item>
+  </ion-card>
+
 </ion-content>
