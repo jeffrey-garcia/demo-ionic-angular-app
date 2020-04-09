@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 import { LoadingController, ModalController } from '@ionic/angular';
-
 import { Model } from '../model/model';
 import { DetailViewComponent } from './modal-container/detail-view.component'
 

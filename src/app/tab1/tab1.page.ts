@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -7,6 +9,8 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
   public title:string = "View"
+
+  private loginSubscription: Subscription;
 
   constructor() {
     console.log(`creating: ${this.constructor.name}`);

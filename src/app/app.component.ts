@@ -45,7 +45,7 @@ export class AppComponent {
         }
       );
 
-      this.doLogin();
+      // this.doLogin();
     });
   }
 

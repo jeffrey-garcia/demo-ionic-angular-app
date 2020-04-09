@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      {{ title }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ title }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <!-- Animated Searchbar -->
+  <ion-searchbar 
+    inputmode="numeric" 
+    animated 
+    placeholder="search by ID" 
+    showCancelButton="focus" 
+    cancelButtonText="Cancel">
+  </ion-searchbar>
+
+  <ion-list *ngFor="let item of items$ | async">
+    <ion-item-sliding id="{{ item.orderid }}">
+      <ion-item button (click)="show(item)">
+        Item: {{ item.orderid }}
+      </ion-item>
+      <ion-item-options side="end">
+        <!-- <button ion-button color="danger" (click)="delete(item)">Delete</button> -->
+        <ion-button expand="full" color="light" (click)="delete(item)">Delete</ion-button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <app-tab1-container 
+    name="tab 1 container" 
+  ></app-tab1-container>
+
+</ion-content>
