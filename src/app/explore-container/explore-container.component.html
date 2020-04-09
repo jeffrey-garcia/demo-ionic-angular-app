@@ -32,9 +32,9 @@
 
 <ion-content>
   <ion-list *ngFor="let item of items">
-    <ion-item-sliding id="{{ item.name }}">
-      <ion-item>
-        Item: {{ item.name }}
+    <ion-item-sliding id="{{ item.orderid }}">
+      <ion-item button (click)="show(item)">
+        Item: {{ item.orderid }}
       </ion-item>
       <ion-item-options side="end">
         <!-- <button ion-button color="danger" (click)="delete(item)">Delete</button> -->

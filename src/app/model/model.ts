@@ -1,5 +1,10 @@
 export interface Model {
-    id: string,
-    name: string,
+    orderid: string,
+    product?: string,
+    clientname: string,
+    clientphone?: string,
+    ordersize?: string,
+    amount?: string,
+    orderdate?: string,
     status: string
 }

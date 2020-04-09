@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      {{ title }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-button slot="end" size="small" fill="outline" color="dark" (click)="dismiss()">Close</ion-button>
+      <ion-title size="large">{{ title }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- <app-explore-container name="Tab 3 page"></app-explore-container> -->
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Status: {{ order.status }}</ion-card-subtitle>
+      <ion-card-title>Order ID: {{ order.orderid }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Order Date:</ion-label>
+        <ion-note slot="end">{{ order.orderdate }}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Order Size:</ion-label>
+        <ion-note slot="end">{{ order.ordersize }}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Client Name:</ion-label>
+        <ion-note slot="end">{{ order.clientname }}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Client Phone:</ion-label>
+        <ion-note slot="end">{{ order.clientphone }}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Product:</ion-label>
+        <ion-note slot="end">{{ order.product }}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Amount:</ion-label>
+        <ion-note slot="end">{{ order.amount }}</ion-note>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

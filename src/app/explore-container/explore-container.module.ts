@@ -5,11 +5,21 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ExploreContainerComponent } from './explore-container.component';
+import { DetailViewComponent } from './modal-container/detail-view.component';
 
 @NgModule({
   imports: [ CommonModule, FormsModule, IonicModule],
-  declarations: [ExploreContainerComponent],
-  exports: [ExploreContainerComponent]
+  declarations: [
+    ExploreContainerComponent,
+    DetailViewComponent,
+  ],
+  exports: [
+    ExploreContainerComponent,
+    DetailViewComponent,
+  ],
+  entryComponents: [
+    DetailViewComponent,
+  ]
 })
 export class ExploreContainerComponentModule {
   constructor() {

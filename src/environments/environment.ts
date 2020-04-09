@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  envName: 'DEV',
+  SWAGGER_API_BASE_PATH: ''  
 };
 
 /*

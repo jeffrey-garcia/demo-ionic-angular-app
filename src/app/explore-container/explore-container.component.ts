@@ -1,30 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 
 import { Model } from '../model/model';
-
-const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' + 
-              ', seddo eiusmod tempor incididunt ut labore et dolore magna ' + 
-              'aliqua. Ut enim ad minim veniam, quis nostrud exercitation ' + 
-              'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis ' + 
-              'aute irure dolor in reprehenderit in voluptate velit esse ' + 
-              'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat ' + 
-              'cupidatat non proident, sunt in culpa qui officia deserunt mollit ' +
-              'anim id est laborum.';
-
-const images: string[] = [
-  'bandit',
-  'batmobile',
-  'blues-brothers',
-  'bueller',
-  'delorean',
-  'eleanor',
-  'general-lee',
-  'ghostbusters',
-  'knight-rider',
-  'mirth-mobile'
-];
+import { DetailViewComponent } from './modal-container/detail-view.component'
 
 @Component({
   selector: 'app-explore-container',
@@ -34,22 +13,21 @@ const images: string[] = [
 export class ExploreContainerComponent implements OnInit {
   @Input() name: string;
 
-  public items:any [] = [];
-
-  private rotateImg: number = 0;
+  public items:Model[] = [];
 
   constructor(
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    public modalController: ModalController,
   ) { 
     console.log(`creating: ${this.constructor.name}`);
   }
 
-  public myHeaderFn(record, recordIndex, records):string {
-    if (recordIndex % 20 === 0) {
-      return 'Header ' + recordIndex;
-    }
-    return null;
-  }
+  // public myHeaderFn(record, recordIndex, records):string {
+  //   if (recordIndex % 20 === 0) {
+  //     return 'Header ' + recordIndex;
+  //   }
+  //   return null;
+  // }
 
   ngOnInit() {
     console.log(`ngOnInit: ${this.constructor.name}`);
@@ -65,42 +43,38 @@ export class ExploreContainerComponent implements OnInit {
     
     const loading = await this.loadingController.create({
       spinner: "bubbles",
-      // duration: 5000,
       translucent: true
     });
     await loading.present();
 
     for (let i = 0; i < 10; i++) {
       this.items.push({
-        name: i + ' - ' + images[this.rotateImg],
-        imgSrc: this.getImgSrc(),
-        avatarSrc: this.getImgSrc(),
-        imgHeight: Math.floor(Math.random() * 50 + 150),
-        content: lorem.substring(0, Math.random() * (lorem.length - 100) + 100)
+        orderid: `${i}`,
+        clientname: `customer-${i}`,
+        status: `pending`
       });
-
-      this.rotateImg++;
-      if (this.rotateImg === images.length) {
-        this.rotateImg = 0;
-      }
     }
 
     loading.dismiss();
     console.log(`generateStubData - finish`);
   }
 
-  private getImgSrc():string {
-    const src = 'https://dummyimage.com/600x400/${Math.round( Math.random() * 99999)}/fff.png';
-    this.rotateImg++;
-    if (this.rotateImg === images.length) {
-      this.rotateImg = 0;
-    }
-    return src;
+  public async show(item:Model) {
+    console.log(`show: ${JSON.stringify(item)}`);
+
+    const modal = await this.modalController.create({
+      component: DetailViewComponent,
+      swipeToClose: true,
+      componentProps: {
+        'order': item
+      }
+    });
+    return await modal.present();
   }
 
-  public delete(item):void {
+  public delete(item:Model):void {
     console.log(`delete: ${JSON.stringify(item)}`);
-    document.getElementById(item.name).style.display = 'none';
+    document.getElementById(item.orderid).style.display = 'none';
     this.items.splice(this.items.indexOf(item), 1);
   }
 }

@@ -1,0 +1,153 @@
+swagger: '2.0'
+info:
+  description: 'YODA - Order API'  
+  version: 1.0.0
+  title: DEMO-EDA-APP
+  termsOfService: 'https://www.manulife.com/'
+  contact:
+    email: himanshu_sharma@manulife.com
+  license:
+    name: Manulife Asia
+    url: 'http://www.manulife.com'
+host: atoaksserver.manulife.com
+basePath: /api/v1
+#Defines the sections
+tags:
+  - name: order
+    description: Provides functionality to handle Order
+    externalDocs:
+      description: Find out more
+      url: 'https://confluence.ap.manulife.com/display/FE/demo-eda-app'
+schemes:
+  - https
+paths:
+  '/order/info/{orderid}':
+    get:
+      tags:
+        - order
+      summary: Retrieve details of Order
+      description: Returns a single OrderInfo
+      operationId: getOrderByID
+      produces:
+        - application/json
+      parameters:
+        - name: orderid
+          in: path
+          description: ID of Order to return
+          required: true
+          type: string
+          format: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/OrderInfo'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Order not found
+  '/order/update/{orderid}':
+    post:
+      tags:
+        - order
+      summary: Updates a order in ML with form data
+      description: ''
+      operationId: updateOrderForm
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: orderid
+          in: path
+          description: ID of Order that needs to be updated
+          required: true
+          type: string
+          format: string
+        - name: name
+          in: formData
+          description: Updated name of the order
+          required: false
+          type: string
+        - name: status
+          in: formData
+          description: Updated status of the order
+          required: false
+          type: string
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - orderstore_auth:
+            - 'write:order'
+            - 'read:order'
+  '/order/delete/{orderid}':
+    delete:
+      tags:
+        - order
+      summary: Deletes an existing order
+      description: ''
+      operationId: deleteOrderByID
+      produces:
+        - application/json
+      parameters:
+        - name: orderid
+          in: path
+          description: order id to delete
+          required: true
+          type: string
+          format: string
+      responses:
+        '400':
+          description: Invalid order value
+      security:
+        - orderstore_auth:
+            - 'write:order'
+            - 'read:order'
+securityDefinitions:
+  orderstore_auth:
+    type: oauth2
+    authorizationUrl: 'http://www.manulife.com/api/authenticationUrl'
+    flow: implicit
+    scopes:
+      'write:order': modify order in ML
+      'read:order': read your order
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  OrderInfo:
+    title: Order Information
+    description: Defines a order information.
+    type: object
+    required:
+      - orderid
+    properties:
+      orderid:
+        type: string
+        format: string
+      product:
+        type: string
+        format: string
+      clientname:
+        type: string
+        format: string
+      clientphone:
+        type: string
+        format: string
+      ordersize:
+        type: integer
+        format: integer
+      amount:
+        type: integer
+        format: integer
+      orderdate:
+        type: string
+        format: string
+      status:
+        type: string
+        format: string
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'

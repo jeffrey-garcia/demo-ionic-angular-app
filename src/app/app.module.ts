@@ -12,6 +12,10 @@ import { AppComponent } from './app.component';
 import { RestService } from './service/rest-service.service';
 import { EventService } from './service/event-service.service';
 
+// import swagger generated code module
+import { ApiModule as SwaggerApiModule, BASE_PATH as SwaggerBasePath } from './swagger';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,12 +24,14 @@ import { EventService } from './service/event-service.service';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    IonicModule.forRoot(), 
+    IonicModule.forRoot(),
+    SwaggerApiModule 
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: SwaggerBasePath, useValue: environment.SWAGGER_API_BASE_PATH},
     RestService,
     EventService
   ],
