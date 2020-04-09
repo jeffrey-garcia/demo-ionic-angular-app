@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { LoadingController } from '@ionic/angular';
 
+import { Model } from '../model/model';
+
 const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' + 
               ', seddo eiusmod tempor incididunt ut labore et dolore magna ' + 
               'aliqua. Ut enim ad minim veniam, quis nostrud exercitation ' + 
@@ -32,7 +34,7 @@ const images: string[] = [
 export class ExploreContainerComponent implements OnInit {
   @Input() name: string;
 
-  public items: any[] = [];
+  public items:any [] = [];
 
   private rotateImg: number = 0;
 
