@@ -2,6 +2,7 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
+  "defaultProject": "demo-ui-app",
   "projects": {
     "demo-ui-app": {
       "projectType": "application",
@@ -20,11 +21,24 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
             ],
             "styles": [
-              "src/styles.css"
+              {
+                "input": "src/theme/variables.scss"
+              },
+              {
+                "input": "src/global.scss"
+              }
             ],
             "scripts": []
           },
@@ -56,7 +70,10 @@
                   "maximumError": "10kb"
                 }
               ]
-            }
+            },
+            "ci": {
+              "progress": false
+            }            
           }
         },
         "serve": {
@@ -67,7 +84,10 @@
           "configurations": {
             "production": {
               "browserTarget": "demo-ui-app:build:production"
-            }
+            },
+            "ci": {
+              "progress": false
+            }            
           }
         },
         "extract-i18n": {
@@ -83,14 +103,26 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            "styles": [],
+            "scripts": [],
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
+              {
+                "glob": "favicon.ico",
+                "input": "src/",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets"
+              }
+            ]
+          },
+          "configurations": {
+            "ci": {
+              "progress": false,
+              "watch": false
+            }
           }
         },
         "lint": {
@@ -115,10 +147,23 @@
           "configurations": {
             "production": {
               "devServerTarget": "demo-ui-app:serve:production"
-            }
+            },
+            "ci": {
+              "devServerTarget": "app:serve:ci"
+            }            
           }
         }
       }
     }},
-  "defaultProject": "demo-ui-app"
+  "cli": {
+    "defaultCollection": "@ionic/angular-toolkit"
+  },
+  "schematics": {
+    "@ionic/angular-toolkit:component": {
+      "styleext": "scss"
+    },
+    "@ionic/angular-toolkit:page": {
+      "styleext": "scss"
+    }
+  }  
 }
