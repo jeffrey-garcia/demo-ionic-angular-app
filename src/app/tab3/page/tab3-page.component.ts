@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-tab1-container',
-  templateUrl: './tab1-container.component.html',
-  styleUrls: ['./tab1-container.component.scss'],
+  selector: 'app-tab3-page',
+  templateUrl: './tab3-page.component.html',
+  styleUrls: ['./tab3-page.component.scss'],
 })
-export class Tab1ContainerComponent implements OnInit {
-  
+export class Tab3PageComponent implements OnInit {
+
+  public title:string = "Sync"
+
   constructor() {
     console.log(`creating: ${this.constructor.name}`);
   }
@@ -14,7 +16,7 @@ export class Tab1ContainerComponent implements OnInit {
   ngOnInit() {
     console.log(`ngOnInit: ${this.constructor.name}`);
   }
-  
+
   ngOnDestroy() {
     console.log(`ngOnDestroy: ${this.constructor.name}`);
   }

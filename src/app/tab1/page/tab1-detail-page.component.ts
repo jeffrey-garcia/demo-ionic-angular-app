@@ -1,14 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
-import { Model } from 'src/app/model/model';
+import { Model } from '../../model/model';
 
 @Component({
-  selector: 'app-detail-view',
-  templateUrl: './detail-view.component.html',
-  styleUrls: ['./detail-view.component.scss'],
+  selector: 'app-tab1-detail-page',
+  templateUrl: './tab1-detail-page.component.html',
+  styleUrls: ['./tab1-detail-page.component.scss'],
 })
-export class DetailViewComponent implements OnInit {
+export class Tab1DetailPageComponent implements OnInit {
+
   public title:string = "Detail";
 
   // Data passed in by componentProps

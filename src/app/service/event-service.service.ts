@@ -19,18 +19,4 @@ export class EventService {
     this.loginCompleted.next();
   }
 
-  private fetchDataStarted = new Subject<void>();
-  public fetchDataStartedEvent$ = this.fetchDataStarted.asObservable();
-
-  publishFetchDataStartedEvent() {
-    this.fetchDataStarted.next();
-  }
-
-  private fetchDataCompleted = new Subject<Model[]>();
-  public fetchDataCompletedEvent$ = this.fetchDataCompleted.asObservable();
-
-  publishFetchDataCompletedEvent(items:Model[]) {
-    this.fetchDataCompleted.next(items);
-  }
-
 }

@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { DetailViewComponent } from './detail-view.component';
+import { Tab2PageComponent } from './tab2-page.component';
 
-describe('DetailViewComponent', () => {
-  let component: DetailViewComponent;
-  let fixture: ComponentFixture<DetailViewComponent>;
+describe('Tab2PageComponent', () => {
+  let component: Tab2PageComponent;
+  let fixture: ComponentFixture<Tab2PageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailViewComponent ],
+      declarations: [ Tab2PageComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DetailViewComponent);
+    fixture = TestBed.createComponent(Tab2PageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -3,20 +3,18 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab3Page } from './tab3.page';
+import { Tab3PageComponent } from './page/tab3-page.component';
 import { Tab3ContainerComponent } from './container/tab3-container.component';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: Tab3Page }])
+    RouterModule.forChild([{ path: '', component: Tab3PageComponent }])
   ],
   declarations: [
-    Tab3Page,
+    Tab3PageComponent,
     Tab3ContainerComponent
   ]
 })

@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      {{ title }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ title }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- <app-explore-container name="Tab 2 page"></app-explore-container> -->
+  
+  <ion-content>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>{{ messageSubtitle }}</ion-card-subtitle>
+        <ion-card-title>{{ messageTitle }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <form (ngSubmit)="save()">
+            <!-- Inputs with labels -->
+            <ion-item>
+              <ion-label position="floating">Order ID:</ion-label>
+              <ion-input [(ngModel)]="item.orderid" name="orderid" required></ion-input>
+            </ion-item>
+      
+            <ion-item>
+              <ion-label position="floating">Client Name:</ion-label>
+              <ion-input [(ngModel)]="item.clientname" name="clientname" required></ion-input>
+            </ion-item>
+      
+            <ion-item>
+              <ion-label position="floating">Order Status:</ion-label>
+              <ion-input [(ngModel)]="item.status" name="status" required></ion-input>
+            </ion-item>
+
+            <ion-card-content>
+              <ion-button expand="block" size="medium" fill="outline" color="dark" type="submit">Save</ion-button>
+            </ion-card-content>
+          </form>
+        </ion-list>        
+      </ion-card-content>
+    </ion-card>
+
+    <app-tab2-container name="tab 2 container"></app-tab2-container>

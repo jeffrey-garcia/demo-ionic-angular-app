@@ -2,9 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { LoadingController, ModalController } from '@ionic/angular';
 
-import { DetailViewComponent } from '../../explore-container/modal-container/detail-view.component';
-import { Model } from 'src/app/model/model';
-import { EventService } from 'src/app/service/event-service.service';
+import { Tab1DetailPageComponent } from './tab1-detail-page.component';
+import { Model } from '../../model/model';
+import { EventService } from '../../service/event-service.service';
+import { RestService } from 'src/app/service/rest-service.service';
 
 @Component({
   selector: 'app-tab1-page',
@@ -16,13 +17,12 @@ export class Tab1PageComponent implements OnInit {
 
   private items:Model[] = [];
   public items$:Observable<Model[]> = of(this.items);
-
-  private fetchDataCompleted: Subscription;
-
+  
   constructor(
     public loadingController: LoadingController,
     public modalController: ModalController,
     public eventService: EventService,
+    public restService: RestService
   ) {
     console.log(`creating: ${this.constructor.name}`);
   }
@@ -33,11 +33,11 @@ export class Tab1PageComponent implements OnInit {
 
   ionViewWillEnter() {
     console.log(`ionViewWillEnter: ${this.constructor.name}`);
+    this.doFetchData();
   }
 
   ionViewDidEnter() {
     console.log(`ionViewDidEnter: ${this.constructor.name}`);
-    this.doFetchData();
   }
 
   ionViewWillLeave() {
@@ -50,33 +50,29 @@ export class Tab1PageComponent implements OnInit {
 
   ngOnDestroy() {
     console.log(`ngOnDestroy: ${this.constructor.name}`);
-    this.fetchDataCompleted.unsubscribe();
   }
 
-  private async doFetchData() {
+  private async doFetchData():Promise<void> {
     const loading = await this.loadingController.create({
       spinner: "bubbles",
       translucent: true
     });
     await loading.present();
 
-    this.fetchDataCompleted = this.eventService.fetchDataCompletedEvent$.subscribe(
+    this.restService.fetchDataStub().subscribe(
       (response) => {
-        console.log(`fetch data completed: ${JSON.stringify(response)}`);
         this.items = response;
         this.items$ = of(this.items);
         loading.dismiss();
       }
     );
-
-    this.eventService.publishFetchDataStartedEvent();
   }
 
-  public async show(item:Model) {
+  public async show(item:Model):Promise<void> {
     console.log(`show: ${JSON.stringify(item)}`);
 
     const modal = await this.modalController.create({
-      component: DetailViewComponent,
+      component: Tab1DetailPageComponent,
       swipeToClose: true,
       componentProps: {
         'order': item
@@ -85,11 +81,47 @@ export class Tab1PageComponent implements OnInit {
     return await modal.present();
   }
 
-  public delete(item:Model):void {
+  public async delete(item:Model):Promise<void> {
     console.log(`delete: ${JSON.stringify(item)}`);
-    document.getElementById(item.orderid).style.display = 'none';
-    this.items.splice(this.items.indexOf(item), 1);
-    this.items$ = of(this.items);
+
+    const loading = await this.loadingController.create({
+      spinner: "bubbles",
+      translucent: true
+    });
+    await loading.present();
+
+    this.restService.deleteDataStub(item).subscribe(
+      (response) => {
+        console.log(`deleted: ${JSON.stringify(response)}`);
+        // document.getElementById(item.orderid).style.display = 'none';
+        this.items$ = of(this.items);
+        loading.dismiss();
+      }
+    );
   }
 
+  public async search(event):Promise<void> {
+    console.log(`search: ${event.target.value}`);
+
+    let input = event.target.value;
+    if (input && input.trim() != '') {
+      this.restService.searchDataStub(input).subscribe(
+        (response) => {
+          if (response != null) {
+            console.log(`response: ${JSON.stringify(response)}`);
+            this.items$ = of([response]);
+          } else {
+            this.items$ = of([]);
+          }
+        }
+      );
+    } else {
+      this.items$ = of(this.items);
+    }
+  }
+
+  public cancelSearch(event):void {
+    console.log(`cancelSearch: ${event.target.value}`);
+    this.items$ = of(this.items);
+  }
 }

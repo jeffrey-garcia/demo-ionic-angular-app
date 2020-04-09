@@ -19,7 +19,10 @@
     animated 
     placeholder="search by ID" 
     showCancelButton="focus" 
-    cancelButtonText="Cancel">
+    cancelButtonText="Cancel"
+    (ionInput)="search($event)"
+    (ionCancel)="cancelSearch($event)"
+  >
   </ion-searchbar>
 
   <ion-list *ngFor="let item of items$ | async">
@@ -34,8 +37,6 @@
     </ion-item-sliding>
   </ion-list>
 
-  <app-tab1-container 
-    name="tab 1 container" 
-  ></app-tab1-container>
+  <app-tab1-container name="tab 1 container"></app-tab1-container>
 
 </ion-content>
