@@ -6,9 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  public title:string = "View"
 
   constructor() {
     console.log(`creating: ${this.constructor.name}`);
+  }
+
+  ngOnInit() {
+    console.log(`ngOnInit: ${this.constructor.name}`);
+  }
+
+
+
+  ngOnDestroy() {
+    console.log(`ngOnDestroy: ${this.constructor.name}`);
   }
 
 }

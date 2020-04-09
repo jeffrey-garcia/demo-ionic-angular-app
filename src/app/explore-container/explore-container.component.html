@@ -1,4 +1,58 @@
-<div id="container">
-  <strong>{{ name }}</strong>
-  <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-</div>
+<!-- <ion-content>
+  <ion-virtual-scroll [items]="items">
+    <ion-item *virtualItem="let item">
+      {{ item }}
+    </ion-item>
+  </ion-virtual-scroll>
+</ion-content> -->
+
+<!-- <ion-content>
+  <ion-virtual-scroll [items]="items" approxItemHeight="320px">
+    <ion-item-divider *virtualHeader="let header">
+      {{ header }}
+    </ion-item-divider>
+    <ion-item>
+      Item: {{ item.name }}
+    </ion-item>
+  </ion-virtual-scroll>
+</ion-content> -->
+
+<ion-content>
+  <ion-list *ngFor="let item of items">
+    <ion-item-sliding id="{{ item.name }}">
+      <ion-item>
+        Item: {{ item.name }}
+      </ion-item>
+      <ion-item-options side="end">
+        <button ion-button color="danger" (click)="delete(item)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<!-- ion-virtual-scroll won't rerender the elements in the view -->
+<ion-content>
+  <!-- <ion-virtual-scroll [items]="items" approxItemHeight="320px">
+    <ion-list *virtualItem="let item">
+      <ion-item-sliding id="{{ item.name }}">
+        <ion-item>
+          Item: {{ item.name }}
+        </ion-item>
+        <ion-item-options side="end">
+          <button ion-button color="danger" (click)="delete(item)">Delete</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>    
+  </ion-virtual-scroll>
+</ion-content> -->
+
+<!-- <ion-content>
+  <ion-virtual-scroll [items]="items" approxItemHeight="320px">
+    <ion-card *virtualItem="let item">
+      <ion-card-header>
+        <ion-card-title>{{ item.name }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>{{ item.content }}</ion-card-content>
+    </ion-card>
+  </ion-virtual-scroll>
+</ion-content> -->
