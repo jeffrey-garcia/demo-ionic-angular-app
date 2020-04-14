@@ -5,6 +5,8 @@ import { LoadingController } from '@ionic/angular';
 import { Model } from 'src/app/model/model';
 import { RestService } from 'src/app/service/rest-service.service';
 import { promise } from 'protractor';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-tab2-page',
@@ -16,9 +18,11 @@ export class Tab2PageComponent implements OnInit {
   public title:string = "Add/Modify";
 
   public item:Model = {
-    orderid: null,
-    clientname: null,
-    status: null
+    product: '',
+    clientname: '',
+    clientphone: '',
+    ordersize: '',
+    amount: ''
   };
 
   public messageSubtitle:string = "Fill up the necessary fields and click save";
@@ -41,9 +45,7 @@ export class Tab2PageComponent implements OnInit {
   }
 
   public async save():Promise<void> {
-    if (this.item.orderid!=null && this.item.orderid!="" &&
-        this.item.clientname!=null && this.item.clientname!="" && 
-        this.item.status!=null && this.item.status!=""
+    if (this.item.clientname!=null && this.item.clientname!="" 
     ) {
       console.log(`save: ${JSON.stringify(this.item)}`);
 
@@ -53,17 +55,34 @@ export class Tab2PageComponent implements OnInit {
       });
       await loading.present();
 
-      this.restService.createDataStub(this.item).subscribe(
+      // this.restService.createDataStub(this.item).subscribe(
+      //   (response) => {
+      //     console.log(`response: ${JSON.stringify(response)}`);
+      //     this.item = {
+      //       orderid: null,
+      //       clientname: null,
+      //       status: null
+      //     };
+      //     loading.dismiss();
+      //   }
+      // );
+
+      this.restService.createData(this.item).subscribe(
         (response) => {
           console.log(`response: ${JSON.stringify(response)}`);
+
           this.item = {
-            orderid: null,
-            clientname: null,
-            status: null
-          };
-          loading.dismiss();
+            product: '',
+            clientname: '',
+            clientphone: '',
+            ordersize: '',
+            amount: '',
+          }
+          loading.dismiss();          
         }
       )
+    } else {
+      console.log(`mandatory input required`);
     }
   }
 

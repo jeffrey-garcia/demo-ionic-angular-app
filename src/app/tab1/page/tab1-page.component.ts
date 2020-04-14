@@ -33,7 +33,9 @@ export class Tab1PageComponent implements OnInit {
 
   ionViewWillEnter() {
     console.log(`ionViewWillEnter: ${this.constructor.name}`);
-    this.doFetchData();
+
+    // refresh the page whenever entering
+    this.doFetchData(); 
   }
 
   ionViewDidEnter() {
@@ -59,7 +61,14 @@ export class Tab1PageComponent implements OnInit {
     });
     await loading.present();
 
-    this.restService.fetchDataStub().subscribe(
+    // this.restService.fetchDataStub().subscribe(
+    //   (response) => {
+    //     this.items = response;
+    //     this.items$ = of(this.items);
+    //     loading.dismiss();
+    //   }
+    // );
+    this.restService.fetchData().subscribe(
       (response) => {
         this.items = response;
         this.items$ = of(this.items);
@@ -90,10 +99,18 @@ export class Tab1PageComponent implements OnInit {
     });
     await loading.present();
 
-    this.restService.deleteDataStub(item).subscribe(
+    // this.restService.deleteDataStub(item).subscribe(
+    //   (response) => {
+    //     console.log(`deleted: ${JSON.stringify(response)}`);
+    //     // document.getElementById(item.orderid).style.display = 'none';
+    //     this.items$ = of(this.items);
+    //     loading.dismiss();
+    //   }
+    // );
+    this.restService.deleteData(item).subscribe(
       (response) => {
-        console.log(`deleted: ${JSON.stringify(response)}`);
-        // document.getElementById(item.orderid).style.display = 'none';
+        console.log(`items: ${JSON.stringify(this.items)}`);
+        this.items.splice(this.items.indexOf(item), 1);
         this.items$ = of(this.items);
         loading.dismiss();
       }
@@ -105,7 +122,18 @@ export class Tab1PageComponent implements OnInit {
 
     let input = event.target.value;
     if (input && input.trim() != '') {
-      this.restService.searchDataStub(input).subscribe(
+      // this.restService.searchDataStub(input).subscribe(
+      //   (response) => {
+      //     if (response != null) {
+      //       console.log(`response: ${JSON.stringify(response)}`);
+      //       this.items$ = of([response]);
+      //     } else {
+      //       this.items$ = of([]);
+      //     }
+      //   }
+      // );
+
+      this.restService.searchData(input).subscribe(
         (response) => {
           if (response != null) {
             console.log(`response: ${JSON.stringify(response)}`);
@@ -115,6 +143,7 @@ export class Tab1PageComponent implements OnInit {
           }
         }
       );
+
     } else {
       this.items$ = of(this.items);
     }

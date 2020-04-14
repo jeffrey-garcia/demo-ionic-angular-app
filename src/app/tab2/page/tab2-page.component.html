@@ -27,18 +27,28 @@
           <form (ngSubmit)="save()">
             <!-- Inputs with labels -->
             <ion-item>
-              <ion-label position="floating">Order ID:</ion-label>
-              <ion-input [(ngModel)]="item.orderid" name="orderid" required></ion-input>
+              <ion-label position="floating">Product:</ion-label>
+              <ion-input [(ngModel)]="item.product" name="product" required></ion-input>
             </ion-item>
       
+            <ion-item>
+              <ion-label position="floating">Order Size</ion-label>
+              <ion-input [(ngModel)]="item.ordersize" name="ordersize" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Amount:</ion-label>
+              <ion-input [(ngModel)]="item.amount" name="amount" required></ion-input>
+            </ion-item>
+            
             <ion-item>
               <ion-label position="floating">Client Name:</ion-label>
               <ion-input [(ngModel)]="item.clientname" name="clientname" required></ion-input>
             </ion-item>
       
             <ion-item>
-              <ion-label position="floating">Order Status:</ion-label>
-              <ion-input [(ngModel)]="item.status" name="status" required></ion-input>
+              <ion-label position="floating">Client Phone:</ion-label>
+              <ion-input [(ngModel)]="item.clientphone" name="clientphone" required></ion-input>
             </ion-item>
 
             <ion-card-content>
