@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  envName: 'PRDO',
-  SWAGGER_API_BASE_PATH: ''
+  envName: 'PROD',
+  SWAGGER_API_BASE_PATH: 'http://localhost:8080'
 };

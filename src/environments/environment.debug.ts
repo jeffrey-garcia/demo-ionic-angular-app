@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  envName: '',
+  envName: 'DEBUG', // local stub
   SWAGGER_API_BASE_PATH: ''  
 };
 

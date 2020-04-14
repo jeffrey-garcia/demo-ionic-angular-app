@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  envName: '',
-  SWAGGER_API_BASE_PATH: ''  
+  envName: 'LOCAL',
+  SWAGGER_API_BASE_PATH: 'http://localhost:8080'  
 };
 
 /*

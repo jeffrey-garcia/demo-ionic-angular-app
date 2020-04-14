@@ -54,19 +54,7 @@ export class Tab2PageComponent implements OnInit {
         translucent: true
       });
       await loading.present();
-
-      // this.restService.createDataStub(this.item).subscribe(
-      //   (response) => {
-      //     console.log(`response: ${JSON.stringify(response)}`);
-      //     this.item = {
-      //       orderid: null,
-      //       clientname: null,
-      //       status: null
-      //     };
-      //     loading.dismiss();
-      //   }
-      // );
-
+      
       this.restService.createData(this.item).subscribe(
         (response) => {
           console.log(`response: ${JSON.stringify(response)}`);
